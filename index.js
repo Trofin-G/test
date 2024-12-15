@@ -10,7 +10,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const mongoURI = "mongodb+srv://trofing98:wGgP7CiBZHlmUAwT@teste.uoydm.mongodb.net/?retryWrites=true&w=majority&appName=Teste";
+const mongoURI = process.env.MONGO_URI || "mongodb+srv://trofing98:wGgP7CiBZHlmUAwT@teste.uoydm.mongodb.net/?retryWrites=true&w=majority&appName=Teste";
 
 const connectDB = async () => {
   try {
