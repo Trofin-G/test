@@ -10,16 +10,24 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-// Conectare la baza de date (MongoDB)
-const DB_URI = process.env.DB_URI || "mongodb://127.0.0.1:27017/mydatabase";
-mongoose
-  .connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("Conectat la baza de date"))
-  .catch((err) => console.log("Eroare la conectarea bazei de date:", err));
+const mongoURI = "mongodb+srv://trofing98:wGgP7CiBZHlmUAwT@teste.uoydm.mongodb.net/?retryWrites=true&w=majority&appName=Teste";
+
+const connectDB = async () => {
+  try {
+      await mongoose.connect(mongoURI, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+      });
+      console.log("MongoDB connected!");
+  } catch (err) {
+      console.error("Error connecting to MongoDB", err);
+      process.exit(1);
+  }
+};
 
 // Rute
 app.get("/", (req, res) => {
-  res.send("Serverul funcționează!");
+  res.send("Serverul funcționează!w2");
 });
 
 // Pornire server
@@ -30,3 +38,7 @@ app.listen(3000, "0.0.0.0", () => {
 // 192.168.1.128:3000
 const userRoutes = require("./routes/userRoutes");
 app.use("/api", userRoutes);
+
+
+module.exports = connectDB;
+
