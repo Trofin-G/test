@@ -19,6 +19,8 @@ router.get('/users', async (req, res) => {
     try {
         const users = await User.find();
         res.json(users);
+        console.log("🚀 ~ router.get ~ users -", users)
+
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
